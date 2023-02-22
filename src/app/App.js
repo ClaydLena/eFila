@@ -1,11 +1,11 @@
-import Service from '../pages/Service';
+import SpecialNeeds from '../pages/SpecialNeeds';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Service/>
+        <SpecialNeeds/>
       </header>
     </div>
   );

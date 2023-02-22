@@ -1,17 +1,8 @@
 import React from "react";
 import Layout from "../components/layout/Layout";
 import Buttons from "../components/button/Button"
-import { services } from "../utils/services";
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const getStyles = makeStyles(() => ({
-  layout: {
-   display:'flex',
-   flexDirection:'column',
-   rowGap:'10px'
-  },
-}));
+import { services } from "../utils/variables";
+import { getStyles } from "./Styles";
 
 function Service (){
     const classes = getStyles()
@@ -20,7 +11,7 @@ function Service (){
     return(
         <React.Fragment>
             <Layout>
-                <div className={classes.layout}>
+                <div className={classes.btnsGridLayout}>
                     <p>Selecione o serviço</p>
                     {
                         services.map((service)=> 
