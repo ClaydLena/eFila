@@ -10,7 +10,7 @@ const getStyles = makeStyles(() => ({
     }
 }));
 
-function Input({ type, placeholder, onChange, label, value, min, max }) {
+function Input({ type, placeholder, onChange, label, value,}) {
     const classes = getStyles();
 
     return (
@@ -23,8 +23,6 @@ function Input({ type, placeholder, onChange, label, value, min, max }) {
             placeholder={placeholder}
             onChange={onChange}
             size='small'
-            min={min}
-            max={max}
         />
     )
 }
