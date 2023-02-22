@@ -30,6 +30,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@emotion/react", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:11.10.6"],\
             ["@emotion/styled", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:11.10.6"],\
+            ["@material-ui/icons", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:4.11.3"],\
+            ["@mui/icons-material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9"],\
             ["@mui/material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.10"],\
             ["@mui/styled-engine-sc", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
@@ -3886,6 +3888,37 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@material-ui/icons", [\
+        ["npm:4.11.3", {\
+          "packageLocation": "./.yarn/cache/@material-ui-icons-npm-4.11.3-da22086c60-f849a8c4fe.zip/node_modules/@material-ui/icons/",\
+          "packageDependencies": [\
+            ["@material-ui/icons", "npm:4.11.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:4.11.3", {\
+          "packageLocation": "./.yarn/__virtual__/@material-ui-icons-virtual-b9ddd92c5d/0/cache/@material-ui-icons-npm-4.11.3-da22086c60-f849a8c4fe.zip/node_modules/@material-ui/icons/",\
+          "packageDependencies": [\
+            ["@material-ui/icons", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:4.11.3"],\
+            ["@babel/runtime", "npm:7.21.0"],\
+            ["@material-ui/core", null],\
+            ["@types/material-ui__core", null],\
+            ["@types/react", null],\
+            ["@types/react-dom", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@material-ui/core",\
+            "@types/material-ui__core",\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@mui/base", [\
         ["npm:5.0.0-alpha.118", {\
           "packageLocation": "./.yarn/cache/@mui-base-npm-5.0.0-alpha.118-3332fd3a48-0de774b920.zip/node_modules/@mui/base/",\
@@ -3925,6 +3958,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@mui-core-downloads-tracker-npm-5.11.9-11c07b1c48-2fcb81a43a.zip/node_modules/@mui/core-downloads-tracker/",\
           "packageDependencies": [\
             ["@mui/core-downloads-tracker", "npm:5.11.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@mui/icons-material", [\
+        ["npm:5.11.9", {\
+          "packageLocation": "./.yarn/cache/@mui-icons-material-npm-5.11.9-3d86ef41f8-bb7e447827.zip/node_modules/@mui/icons-material/",\
+          "packageDependencies": [\
+            ["@mui/icons-material", "npm:5.11.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-icons-material-virtual-40b27853f2/0/cache/@mui-icons-material-npm-5.11.9-3d86ef41f8-bb7e447827.zip/node_modules/@mui/icons-material/",\
+          "packageDependencies": [\
+            ["@mui/icons-material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9"],\
+            ["@babel/runtime", "npm:7.21.0"],\
+            ["@mui/material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.10"],\
+            ["@types/mui__material", null],\
+            ["@types/react", null],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@mui/material",\
+            "@types/mui__material",\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9296,6 +9356,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fila-frontend", "workspace:."],\
             ["@emotion/react", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:11.10.6"],\
             ["@emotion/styled", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:11.10.6"],\
+            ["@material-ui/icons", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:4.11.3"],\
+            ["@mui/icons-material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9"],\
             ["@mui/material", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.10"],\
             ["@mui/styled-engine-sc", "virtual:75f7b4bf322a71b1dc0cb46e100f5960f9acc4407636f45781056eff42312372df88b241c62acbc0d3da3965d1b38f61f590789f4c37f857a0b5bfc99734995d#npm:5.11.9"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\

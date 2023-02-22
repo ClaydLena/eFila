@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.5",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@mui/styled-engine-sc": "^5.11.9",
     "@testing-library/jest-dom": "^5.14.1",
@@ -39,5 +41,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
