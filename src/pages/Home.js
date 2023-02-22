@@ -4,6 +4,8 @@ import Input from '../components/input/Input';
 import Buttons from "../components/button/Button";
 
 function Home() {
+    const [code, setCode] = React.useState()
+
     return (
         <React.Fragment>
             <Layout>
@@ -12,7 +14,7 @@ function Home() {
                     <Input
                         type='text'
                         placeholder='Código da agência'
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={(e) => setCode(e.target.value)}
 
                     />
                     <Buttons
