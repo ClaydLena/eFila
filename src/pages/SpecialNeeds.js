@@ -10,6 +10,7 @@ function SpecialNeeds() {
     const [special, setSpecial] = React.useState(0)
     const [needs, setNeeds] = React.useState()
     const [done, setDone] = React.useState(false)
+    const [clickedBtn, setClickedBtn] = React.useState()
 
     return (
         <React.Fragment>
@@ -36,10 +37,10 @@ function SpecialNeeds() {
                                 <Buttons
                                     color='primary'
                                     size='small'
-                                    variant='outlined'
+                                    variant={value.id == clickedBtn ? 'contained': 'outlined'}
                                     label={value.label}
                                     key={value.id}
-                                    onClick={() => { setNeeds(value); setDone(true) }}
+                                    onClick={() => { setNeeds(value); setDone(true); setClickedBtn(value.id) }}
                                 />
                             )
                             : null
