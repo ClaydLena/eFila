@@ -10,5 +10,10 @@ export const getStyles = makeStyles(() => ({
         display:'grid',
         gridTemplateColumns:'auto auto',
         columnGap:'10px'
+    },
+    feedbackLayout:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
     }
 }));
