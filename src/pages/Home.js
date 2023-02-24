@@ -21,6 +21,7 @@ function Home() {
                         label='Entrar'
                         color='primary'
                         variant='contained'
+                        size='large'
                         onClick={() => console.log('clicked')}
                     />
                 </div>
