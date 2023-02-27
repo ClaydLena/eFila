@@ -12,7 +12,7 @@ const getStyles = makeStyles(() => ({
     margin:'10vh 0 25vh 0'
   },
   text:{
-    color:'#37C386',
+    color:'#219ebc',
     fontWeight:'600px'
   }
 }));
