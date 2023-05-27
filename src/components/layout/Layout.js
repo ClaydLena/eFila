@@ -8,7 +8,7 @@ const getStyles = makeStyles(() => ({
     color:'#333333 !important'
   },
   children:{
-    margin:'10vh 0 25vh 0'
+    margin:'10vh 0 45vh 0'
   },
   text:{
     color:'#219ebc',
@@ -23,7 +23,7 @@ function Layout({ children }) {
     return (
         <React.Fragment>
             <div className={classes.layout}>
-                <h2 className={classes.text}>Banco 123</h2>
+                <h2 className={classes.text}>Agência Bancária XYZ</h2>
                 <div className={classes.children}>
                     {children}
                 </div>
