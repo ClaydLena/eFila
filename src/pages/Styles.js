@@ -10,13 +10,20 @@ export const getStyles = makeStyles(() => ({
         display: 'grid',
         gridTemplateColumns: 'auto auto',
         columnGap: '10px',
-        width:'100%',
+        // width:'100%',
         placeContent:'center'
     },
     feedbackLayout: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    senhaTxt :{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent:'space-between',
+        margin: '-3vh 0 1vh 0 !important',
+        borderBottom:'1px solid grey'
     }
 }));
 
@@ -24,7 +31,7 @@ export const panelStyles = makeStyles(() => ({
     container: {
         display: 'grid',
         gridTemplateColumns: '49% 2% 49%',
-        width: '100%',
+        // width: '100%',
         height: '90vh'
     },
     gridItem: {
@@ -54,12 +61,12 @@ export const loginStyles = makeStyles(() => ({
         display: 'flex',
         placeContent: 'center',
         backgroundColor: '#bdbdbd',
-        width: '100%',
+        // width: '100%',
     },
     card: {
         height: '450px',
         marginTop: '50px',
-        width: '400px',
+        // width: '400px',
         textalign: 'center !important',
         alignItems:'center',
         borderRadius: '50%',

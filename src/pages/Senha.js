@@ -2,73 +2,65 @@ import React from "react";
 import Buttons from "../components/button/Button";
 import Layout from "../components/layout/Layout";
 import { getStyles } from "./Styles";
+import { useNavigate } from "react-router-dom";
 
-function showInfo(moment) {
+function Senha() {
     const classes = getStyles()
+    const navigate = useNavigate()
+    const [confirmed, setConfirmed] = React.useState(false)
 
-    switch (moment) {
-        case "confirm":
-            return (
-                <React.Fragment>
-                    <div>
-                        <p>Será antendido dentro de <strong>30min</strong></p>
-                        <div className={classes.btnsGridLayout}>
-                            <Buttons
-                                label='Gerar Senha'
-                                variant='contained'
-                                color='primary'
-                                onClick={() => console.log(0)}
-                            />
-                            <Buttons
-                                label='Cancelar'
-                                variant='contained'
-                                color='secondary'
-                                onClick={() => console.log(0)}
-                            />
-                        </div>
-                    </div>
-                </React.Fragment>
-            );
-        case "show_feedback":
-            return (
-                <React.Fragment>
-                    <div>
-                        <p>Senha gerada com sucesso, memorize-a e fique atento à chamada.</p>
-                        <p>O teu código é</p>
-                        <h3>D0003</h3>
-                    </div>
-                </React.Fragment>
-            )
-        case "show_call":
-            return (
-                <React.Fragment>
-                    <div>
-                        <p>Atenção! Dirija-se à caixa</p>
-                        <h3>Caixa 3</h3>
-                        <Buttons
-                            label='Sim'
-                            variant='contained'
-                            color='secondary'
-                            onClick={() => console.log(0)}
-                        />
-                        <p>00:59</p>
-                    </div>
-                </React.Fragment>
-            )
+    function handleCancel(){
+        navigate('/')
     }
-}
-
-
-function Service() {
-    const classes = getStyles()
 
     return (
         <React.Fragment>
             <Layout>
-                {showInfo("show_call")}
+                {
+                    confirmed ?
+                        <React.Fragment>
+                            <div>
+                                <p>Senha gerada com sucesso, memorize-a e fique atento à chamada.</p>
+                                <p>O teu código é</p>
+                                <h3>D0003</h3>
+                            </div>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <div>
+                                <div className={classes.senhaTxt}>
+                                    <p>Pessoas na fila antes de você:</p>
+                                    <strong>30min</strong>
+                                </div>
+                                <div className={classes.senhaTxt}>
+                                    <p>Hora de atendimento prevista:</p>
+                                    <strong>30min</strong>
+                                </div>
+                                <div className={classes.senhaTxt}>
+                                    <p>Tempo de espera estimado:</p>
+                                    <strong>30min</strong>
+                                </div>
+
+                                <div className={classes.btnsGridLayout}>
+                                    <Buttons
+                                        label='Gerar Senha'
+                                        variant='contained'
+                                        color='primary'
+                                        onClick={() => setConfirmed(true)}
+                                    />
+                                    <Buttons
+                                        label='Cancelar'
+                                        variant='contained'
+                                        color='secondary'
+                                        onClick={() => handleCancel()}
+                                    />
+                                </div>
+                            </div>
+                        </React.Fragment>
+                }
             </Layout>
         </React.Fragment>
     )
 }
 
-export default Service
+export default Senha

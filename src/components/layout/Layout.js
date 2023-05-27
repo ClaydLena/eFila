@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const getStyles = makeStyles(() => ({
   layout: {
-    width:'35%',
+    // width:'35%',
     height:'95vh',
     padding:'3vh 0 0 0',
     color:'#333333 !important',
