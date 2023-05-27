@@ -1,4 +1,4 @@
-import { Home, Panel, Senha, Service, SpecialNeeds,NotFound  } from "../pages/index"
+import { Home, Panel, Senha, Service,NotFound  } from "../pages/index"
 export const routesList = [
     {
         label: "Home",
@@ -19,11 +19,6 @@ export const routesList = [
         label: "Service",
         path: "/service",
         Component: Service
-    },
-    {
-        label: "SpecialNeeds",
-        path: "/special",
-        Component: SpecialNeeds
     },
     {
         label: "notfound",

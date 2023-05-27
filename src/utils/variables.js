@@ -1,24 +1,13 @@
 export const services = [
     {
         'service_id':0,
-        'service_name':'Depósito'
-    },
-    {
-        'service_id':1,
-        'service_name':'Atendimento'
-    }
-]
-
-export const isSpecial = [
-    {
-        'id':0,
-        'label':'Não',
+        'service_name':'Depósito',
         'color':'primary'
     },
     {
-        'id':1,
-        'label':'Sim',
-        'color':'secondary'
+        'service_id':1,
+        'service_name':'Atendimento',
+        'color':'primary'
     }
 ]
 

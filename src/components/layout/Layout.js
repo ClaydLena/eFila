@@ -5,10 +5,14 @@ const getStyles = makeStyles(() => ({
   layout: {
     width:'35%',
     height:'95vh',
-    color:'#333333 !important'
+    padding:'3vh 0 0 0',
+    color:'#333333 !important',
   },
   children:{
-    margin:'10vh 0 45vh 0'
+    padding:'3vh 0 0 0',
+    display:'flex',
+    height:'80vh',
+    placeContent:'center',
   },
   text:{
     color:'#219ebc',

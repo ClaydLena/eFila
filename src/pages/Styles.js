@@ -4,12 +4,14 @@ export const getStyles = makeStyles(() => ({
     btnsGridLayout: {
         display: 'flex',
         flexDirection: 'column',
-        rowGap: '10px'
+        rowGap: '10px',
     },
     isSpecial: {
         display: 'grid',
         gridTemplateColumns: 'auto auto',
-        columnGap: '10px'
+        columnGap: '10px',
+        width:'100%',
+        placeContent:'center'
     },
     feedbackLayout: {
         display: 'flex',
