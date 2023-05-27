@@ -2,9 +2,11 @@ import React from "react";
 import Layout from "../components/layout/Layout";
 import Input from '../components/input/Input';
 import Buttons from "../components/button/Button";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const [code, setCode] = React.useState()
+    const navigate = useNavigate()
 
     return (
         <React.Fragment>
@@ -22,7 +24,7 @@ function Home() {
                         color='primary'
                         variant='contained'
                         size='large'
-                        onClick={() => console.log('clicked')}
+                        onClick={() => navigate('panel')}
                     />
                 </div>
             </Layout>
