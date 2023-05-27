@@ -31,8 +31,9 @@ export const panelStyles = makeStyles(() => ({
     container: {
         display: 'grid',
         gridTemplateColumns: '49% 2% 49%',
-        // width: '100%',
-        height: '90vh'
+        width: '100%',
+        height: '90vh',
+        padding:'10vh 0 0 0',
     },
     gridItem: {
         textAlign: 'center !important',
@@ -41,10 +42,11 @@ export const panelStyles = makeStyles(() => ({
         fontSize: '28px'
     },
     cardList: {
-        padding: '1%',
+        gap:'2vh',
+        padding:'2%',
         display: 'flex',
-        gap: '1%',
         flexWrap: 'wrap',
+        justifyContent:'flex-start',
     }
 }));
 

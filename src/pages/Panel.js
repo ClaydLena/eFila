@@ -5,15 +5,15 @@ import { panelStyles } from "./Styles";
 
 function Card() {
     const styles = {
-        padding:'1%',
-        width:'18%',
-        fontSize:'20px',
-        height:'18vh'
+        padding:'1vh 0.5vw',
+        width:'7.5vw',
+        fontSize:'18px',
+        height:'10vh'
     
     }
     return (
-        <Paper style={styles} elevation={5}>
-            <h4>Caixa 123 - D003</h4>
+        <Paper style={styles} elevation={8}>
+            <h5>D003  Caixa 123</h5>
         </Paper>
     )
 }
@@ -28,7 +28,7 @@ function Panel() {
                 <div className={classes.gridItem}>
                     <h4 className={classes.title}>Depósitos</h4>
                     <div className={classes.cardList}>
-                       
+                    
                     </div>
                 </div>
                 <hr></hr>
