@@ -13,22 +13,22 @@ export const services = [
 
 export const situations = [
     {
-        'id':0,
+        'id':1,
         'label':'Idoso',
         'color':'primary'
     },
     {
-        'id':1,
+        'id':2,
         'label':'Deficiente',
         'color':'primary'
     },
     {
-        'id':2,
+        'id':3,
         'label':'Mulher Grávida',
         'color':'primary'
     },
     {
-        'id':3,
+        'id':4,
         'label':'Adulto + criança',
         'color':'primary'
     }

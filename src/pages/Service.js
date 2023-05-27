@@ -5,21 +5,29 @@ import { services } from "../utils/variables";
 import { getStyles } from "./Styles";
 import { situations } from "../utils/variables";
 import Checkbox from "../components/check/Check";
+import { useNavigate } from "react-router-dom";
 
 function Service() {
     const classes = getStyles()
-    const [service, setService] = React.useState({})
+    const navigate = useNavigate()
+    const [service, setService] = React.useState()
     const [special, setSpecial] = React.useState(0)
     const [needs, setNeeds] = React.useState()
-    const [done, setDone] = React.useState(false)
     const [clickedBtn, setClickedBtn] = React.useState()
-
-    console.log(needs, special)
+    const [clickedServiceBtn, setClickedServiceBtn] = React.useState()
 
     function handleChange() {
         setNeeds(null)
         setClickedBtn(null)
         setSpecial(!special)
+    }
+
+    function handleContinue() {
+        let senha = {
+            'serviço': service.service_id,
+            'situação': needs ? needs.id : 0
+        }
+        navigate('/senha')
     }
 
     return (
@@ -32,10 +40,10 @@ function Service() {
                             <Buttons
                                 color='primary'
                                 size='large'
-                                variant='contained'
+                                variant={service.service_id == clickedServiceBtn ? 'contained' : 'outlined'}
                                 label={service.service_name}
                                 key={service.service_id}
-                                onClick={() => setService(service)}
+                                onClick={() => { setService(service); setClickedServiceBtn(service.service_id) }}
                             />
                         )
                     }
@@ -56,21 +64,20 @@ function Service() {
                                             variant={value.id == clickedBtn ? 'contained' : 'outlined'}
                                             label={value.label}
                                             key={value.id}
-                                            onClick={() => { setNeeds(value); setDone(true); setClickedBtn(value.id) }}
+                                            onClick={() => { setNeeds(value); setClickedBtn(value.id) }}
                                         />
                                     )
                                     : null
                             }
                             {
-                                done ?
-                                    <Buttons
-                                        color='primary'
-                                        size='small'
-                                        variant='contained'
-                                        label='Continuar'
-                                        onClick={() => { console.log() }}
-                                    />
-                                    : null
+                                service &&
+                                <Buttons
+                                    color='primary'
+                                    size='small'
+                                    variant='contained'
+                                    label='Continuar'
+                                    onClick={() => { handleContinue() }}
+                                />
                             }
                         </div>
 
