@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import Buttons from "../components/button/Button";
 import { useNavigate } from "react-router-dom";
+import apiService from "../api/apiService";
 
-function Home() {
+function HomeContainer(props) {
     const navigate = useNavigate()
-
+    const { data } = props
     return (
         <React.Fragment>
             <Layout>
                 <div>
                     <h2>Bem-vindo</h2>
-                    <p>Número de pessoas na fila de depósito:123</p>
-                    <p>Número de pessoas na fila de Levantamento:123</p>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px'}}><p>Tamanho da Fila de Depósito:</p><strong>{data?.deposito}</strong></div>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px'}}><p>Tamanho da Fila de Atendimento:</p><strong>{data?.atendimento}</strong></div>
                     <Buttons
                         label='Entrar'
                         color='primary'
@@ -24,6 +25,25 @@ function Home() {
             </Layout>
         </React.Fragment>
     )
+}
+
+function Home() {
+    const [data, setData] = useState()
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const obj = await apiService.fetchData('tamanho')
+                setData(obj)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getData();
+    }, [])
+
+    return <HomeContainer data = {data} />
 }
 
 export default Home
