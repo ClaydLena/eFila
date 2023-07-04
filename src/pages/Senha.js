@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Buttons from "../components/button/Button";
 import Layout from "../components/layout/Layout";
 import { getStyles } from "./Styles";
 import { useNavigate } from "react-router-dom";
+import apiService from '../api/apiService.js'
 
 function Senha() {
     const classes = getStyles()
     const navigate = useNavigate()
     const [confirmed, setConfirmed] = React.useState(false)
+    const senha = JSON.parse(localStorage.getItem('senha'))
 
-    function handleCancel(){
+    console.log(senha.need)
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const data = await apiService.postData('gerarSenha',senha)
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getData();
+    }, [])
+
+    function handleCancel() {
         navigate('/')
+    }
+
+    function handleConfirm() {
+        setConfirmed(true)
     }
 
     return (
@@ -23,30 +43,27 @@ function Senha() {
                                 <p>Senha gerada com sucesso, memorize-a e fique atento à chamada.</p>
                                 <p>O teu código é</p>
                                 <h3>D0003</h3>
+
+                                <Buttons
+                                    label='Ok'
+                                    variant='contained'
+                                    color='secondary'
+                                    onClick={() => handleCancel()}
+                                />
                             </div>
                         </React.Fragment>
                         :
                         <React.Fragment>
                             <div>
-                                <div className={classes.senhaTxt}>
-                                    <p>Pessoas na fila antes de você:</p>
-                                    <strong>30min</strong>
-                                </div>
-                                <div className={classes.senhaTxt}>
-                                    <p>Hora de atendimento prevista:</p>
-                                    <strong>30min</strong>
-                                </div>
-                                <div className={classes.senhaTxt}>
-                                    <p>Tempo de espera estimado:</p>
-                                    <strong>30min</strong>
-                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}><p>Pessoas na fila antes de você:</p><strong>{}</strong></div>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}><p>Tempo de espera estimado:</p><strong>{}</strong></div>
 
                                 <div className={classes.btnsGridLayout}>
                                     <Buttons
                                         label='Gerar Senha'
                                         variant='contained'
                                         color='primary'
-                                        onClick={() => setConfirmed(true)}
+                                        onClick={() => handleConfirm()}
                                     />
                                     <Buttons
                                         label='Cancelar'
