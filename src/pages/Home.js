@@ -12,8 +12,18 @@ function HomeContainer(props) {
             <Layout>
                 <div>
                     <h2>Bem-vindo</h2>
-                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px'}}><p>Tamanho da Fila de Depósito:</p><strong>{data?.deposito}</strong></div>
-                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px'}}><p>Tamanho da Fila de Atendimento:</p><strong>{data?.atendimento}</strong></div>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px', margin:' 10px 0 0 0'}}>
+                        <p>Tamanho da Fila de Depósito:</p><strong>{data?.deposito}</strong>
+                    </div>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px', margin:' 10px 0 0 0'}}>
+                        <p>Tamanho da Fila de Atendimento:</p><strong>{data?.atendimento}</strong>
+                    </div>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px', margin:' 10px 0 0 0'}}>
+                        <p>Tamanho Depósito Especial:</p><strong>{data?.depositoEsp}</strong>
+                    </div>
+                    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', width:'290px', margin:' 10px 0 0 0'}}>
+                        <p>Tamanho Atendimento Especial:</p><strong>{data?.atendimentoEsp}</strong>
+                    </div>
                     <Buttons
                         label='Entrar'
                         color='primary'
