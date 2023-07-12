@@ -27,10 +27,12 @@ function Senha() {
 
     function handleCancel() {
         navigate('/')
+        localStorage.clear()
     }
 
     function handleConfirm() {
         setConfirmed(true)
+        localStorage.clear()
     }
 
     return (
