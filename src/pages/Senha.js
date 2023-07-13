@@ -34,7 +34,7 @@ function Senha() {
     }
 
     async function handleConfirm() {
-        let teste = await apiService.postData('senha3', 
+        let teste = await apiService.postData('senha', 
         {codigo_servico:senha.service, codigo_situacao:senha.need, atendida:0, criada_em: new Date(), actualizada_em:new Date()})
         setConfirmed(true)
         setpost(teste)
@@ -77,12 +77,7 @@ function Senha() {
                             <div>
                                 <p>Senha gerada com sucesso, memorize-a e fique atento à chamada.</p>
                                 <p>O teu código é</p>
-                                {
-                                    senha.service == 0 ?
-                                    <h3>D00{post.id}</h3>
-                                    :
-                                    <h3>A00{post.id}</h3>
-                                }
+                                <h3>{post.id}</h3>##
                                 <br /><br />
                                 <Buttons
                                     label='Ok'

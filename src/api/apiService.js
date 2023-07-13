@@ -27,7 +27,7 @@ async function postData(endpoit, data) {
 
 async function updateData(endpoit,id, data) {
     const options = createResquestOptions('PUT', data)
-    return await sendRequest(`${API_URL}/${endpoit}/${id}`, options);
+    return await sendRequest(`${API_URL}/${endpoit}`, options);
 }
 
 async function deleteData(endpoit,id) {

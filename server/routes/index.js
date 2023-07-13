@@ -9,7 +9,6 @@ var corsOptions = {
   methods: 'GET,POST,PUT,DELETE', 
   allowedHeaders: 'Content-Type,Authorization', 
   exposedHeaders: 'Custom-Header',
-  accessControlAllowOrigin: false
 
 }
 
@@ -29,16 +28,18 @@ router.get('/tamanho', function (req, res, next) {
       ELSE 'Diferente de 0'
     END AS situacao
     FROM senha
-    GROUP BY codigo_servico, situacao;`,
+    GROUP BY codigo_servico, situacao`,
 
     function (err, result) {
-      if (err) throw err;
-
+      if (err) {
+        throw err;
+        console.log(err)
+      }
       const data = {
-        'depositoEsp': (result[0].tamanho ?? 0),
-        'deposito': (result[1].tamanho ?? 0),
-        'atendimentoEsp': (result[2].tamanho ?? 0),
-        'atendimento': (result[3].tamanho ?? 0),
+        'depositoEsp': result[0].tamanho,
+        'deposito': result[1].tamanho,
+        'atendimentoEsp': result[2].tamanho ,
+        'atendimento': result[3].tamanho,
       }
       res.send(data);
     });
@@ -51,9 +52,9 @@ router.get('/gerarsenha', cors(corsOptions), function (req, res, next) {
       WHEN codigo_situacao = 0 THEN 'Igual a 0'
       ELSE 'Diferente de 0'
     END AS situacao,
-    AVG(TIMESTAMPDIFF(SECOND, a.criada_em, a.actualizada_em)) AS valor_tempo_medio,
+    AVG(TIMESTAMPDIFF(SECOND, s.criada_em, s.actualizada_em)) AS valor_tempo_medio,
     COUNT(s.codigo_senha) AS tamanho_senha,
-    AVG(TIMESTAMPDIFF(SECOND, a.criada_em, a.actualizada_em)) * COUNT(s.codigo_senha) AS tempoTotal
+    AVG(TIMESTAMPDIFF(SECOND, s.criada_em, s.actualizada_em)) * COUNT(s.codigo_senha) AS tempoTotal
     FROM senha s
     LEFT JOIN atendimento a ON s.codigo_senha = a.codigo_senha
     WHERE s.atendida = 0
@@ -100,7 +101,6 @@ router.post('/senha', cors(corsOptions), (req, res) => {
 })
 
 router.get('/senhas',cors(corsOptions), function (req, res, next) {
-
   db.query(
     `SELECT *
     FROM Senha
@@ -117,13 +117,83 @@ router.get('/senhas',cors(corsOptions), function (req, res, next) {
     `,
     function (err, result) {
       if (err) throw err;
-      res.send((result ?? 0));
+      res.send(result);
     });
 });
 
-// SELECT *
-// FROM Atendimento
-// ORDER BY criada_em DESC
-// LIMIT 3;
+
+router.get('/update',cors(corsOptions), function (req, res, next) {
+  db.query(
+    `UPDATE Senha
+    SET atendida = 1, actualizada_em = NOW()
+    WHERE codigo_senha = (
+      SELECT codigo_senha
+      FROM Senha
+      WHERE atendida = 0
+      ORDER BY
+        CASE codigo_situacao
+          WHEN 1 THEN 1
+          WHEN 2 THEN 2
+          WHEN 3 THEN 3
+          WHEN 4 THEN 4
+          ELSE 0
+        END,
+        criada_em ASC
+      LIMIT 1
+    );`,
+    
+    function (err, result) {
+      if (err) throw err;
+      res.send(result);
+    });
+});
+
+router.get('/saveAtt',cors(corsOptions), function (req, res, next) {
+  db.query(
+    `UPDATE senha AS s
+    SET codigo_caixa = (
+      SELECT c.codigo_caixa
+      FROM (
+        SELECT DISTINCT codigo_servico, codigo_caixa
+        FROM senha
+        WHERE codigo_caixa NOT IN (
+          SELECT codigo_caixa
+          FROM (
+            SELECT codigo_caixa
+            FROM senha AS s2
+            WHERE codigo_servico = s.codigo_servico
+            ORDER BY 
+              CASE codigo_situacao
+                WHEN 1 THEN 1
+                WHEN 2 THEN 2
+                WHEN 3 THEN 3
+                WHEN 4 THEN 4
+                ELSE 5
+              END,
+              criada_em DESC
+            LIMIT 4
+          ) AS ultimos_caixas
+        )
+        ORDER BY 
+          CASE codigo_situacao
+            WHEN 1 THEN 1
+            WHEN 2 THEN 2
+            WHEN 3 THEN 3
+            WHEN 4 THEN 4
+            ELSE 5
+          END
+        LIMIT 1
+      ) AS c
+      WHERE c.codigo_servico = s.codigo_servico
+      LIMIT 1
+    )
+    WHERE codigo_caixa IS NULL;
+    `,
+    
+    function (err, result) {
+      if (err) throw err;
+      res.send(result);
+    });
+});
 
 module.exports = router;
