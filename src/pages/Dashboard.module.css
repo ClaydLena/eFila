@@ -1,0 +1,13 @@
+.container{
+    background-color: gray!important;
+    display: grid;
+    grid-template-columns: 49vw 49vw;
+    column-gap: 0.1vw !important;
+    width: 98vw;
+    height: 85vh;
+}
+
+.boxes{
+    background-color: white !important;
+    padding: 5vh 1vw 0 1vw;
+}

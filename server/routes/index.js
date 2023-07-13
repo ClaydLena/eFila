@@ -35,10 +35,10 @@ router.get('/tamanho', function (req, res, next) {
       if (err) throw err;
 
       const data = {
-        'depositoEsp': result[0].tamanho,
-        'deposito': result[1].tamanho,
-        'atendimentoEsp': result[2].tamanho,
-        'atendimento': result[3].tamanho,
+        'depositoEsp': (result[0].tamanho ?? 0),
+        'deposito': (result[1].tamanho ?? 0),
+        'atendimentoEsp': (result[2].tamanho ?? 0),
+        'atendimento': (result[3].tamanho ?? 0),
       }
       res.send(data);
     });
@@ -79,56 +79,15 @@ router.get('/gerarsenha', cors(corsOptions), function (req, res, next) {
 
 });
 
-router.post('/senha', cors(corsOptions), function (req, res, next) {
-  const { service, need } = req.body
 
-  db.query(`INSERT INTO senha (codigo_servico, codigo_situacao,atendida) VALUES (${service}, ${need}, 0)`,
-    function (err, result) {
-      if (err) throw err;
-
-      const data = {
-        'deposito': result[0].tamanho,
-        'atendimento': result[1].tamanho
-      }
-      res.send(data);
-    });
-});
-
-router.post('/senha2', cors(corsOptions), function (req, res, next) {
-  console.log(req)
-  const {codigo_servico, codigo_situacao} = req.body;
-
-
-  // db.query(`INSERT INTO senha (codigo_servico, codigo_situacao,atendida) VALUES (?, ?, ? )`,
-  // [codigo_servico, codigo_situacao , 0],
-  //  (err, result) => {
-  //   if (err) {
-  //     console.error('Erro ao inserir os dados no banco de dados:', err);
-  //     res.status(500).json({ error: 'Erro ao inserir os dados no banco de dados' });
-  //   } else {
-  //     const senhaId = result.insertId;
-  //     // res.send({ id: senhaId });
-  //   }
-  // });
-  res.send(JSON.stringify(req.body))
-});
-
-// Rota POST para adicionar uma senha
-router.post('/senha3', cors(corsOptions), (req, res) => {
+router.post('/senha', cors(corsOptions), (req, res) => {
   const { codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em } = req.body;
 
   console.log(codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em, req)
-  // // Verificar se todos os campos necessários foram fornecidos
-  // if (!codigo_servico || !codigo_situacao || !atendida || !criada_em || !atualizada_em) {
-  //   res.status(400).json({ error: 'Todos os campos são obrigatórios' });
-  //   return;
-  // }
 
-  // Montar a consulta SQL para inserir a senha na tabela
   const query = 'INSERT INTO senha (codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em) VALUES (?, ?, ?, ?, ?)';
   const values = [codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em];
 
-  // Executar a consulta no banco de dados
   db.query(query, values, (err, result) => {
     if (err) {
       console.error('Erro ao adicionar a senha:', err);
@@ -139,5 +98,32 @@ router.post('/senha3', cors(corsOptions), (req, res) => {
     }
   });
 })
+
+router.get('/senhas',cors(corsOptions), function (req, res, next) {
+
+  db.query(
+    `SELECT *
+    FROM Senha
+    WHERE atendida = 0
+    ORDER BY
+      CASE codigo_situacao
+        WHEN 1 THEN 1
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 4
+        ELSE 5
+      END,
+      criada_em ASC;
+    `,
+    function (err, result) {
+      if (err) throw err;
+      res.send((result ?? 0));
+    });
+});
+
+// SELECT *
+// FROM Atendimento
+// ORDER BY criada_em DESC
+// LIMIT 3;
 
 module.exports = router;
