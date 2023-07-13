@@ -25,7 +25,7 @@ function Service() {
     function handleContinue() {
         let senha = {
             'service': service.service_id,
-            'need': needs ? needs.id : 5
+            'need': needs ? needs.id : 0
         }
         localStorage.setItem('senha', JSON.stringify(senha))
         navigate('/senha')
