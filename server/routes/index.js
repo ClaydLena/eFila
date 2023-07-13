@@ -6,6 +6,11 @@ const cors = require('cors');
 var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200,
+  methods: 'GET,POST,PUT,DELETE', 
+  allowedHeaders: 'Content-Type,Authorization', 
+  exposedHeaders: 'Custom-Header',
+  accessControlAllowOrigin: false
+
 }
 
 /* GET home page. */
@@ -13,7 +18,7 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/tamanho', cors(corsOptions), function (req, res, next) {
+router.get('/tamanho', function (req, res, next) {
 
   db.query(
     `SELECT
@@ -74,68 +79,10 @@ router.get('/gerarsenha', cors(corsOptions), function (req, res, next) {
 
 });
 
-// router.get('/atendimento/media', (req, res) => {
-//   const senhasNaoAtendidasQuery = 'SELECT * FROM senha WHERE atendida = 0';
-//   db.query(senhasNaoAtendidasQuery, (err, senhasNaoAtendidas) => {
-//     if (err) {
-//       console.error('Erro ao obter senhas não atendidas:', err);
-//       return res.status(500).json({ error: 'Erro interno do servidor' });
-//     }
-
-//     const totalSenhasNaoAtendidas = senhasNaoAtendidas.length;
-
-//     if (totalSenhasNaoAtendidas === 0) {
-//       return res.json({ media: 0 });
-//     }
-
-//     const atendimentosQuery = 'SELECT * FROM atendimento';
-//     db.query(atendimentosQuery, (err, atendimentos) => {
-//       if (err) {
-//         console.error('Erro ao obter atendimentos:', err);
-//         return res.status(500).json({ error: 'Erro interno do servidor' });
-//       }
-
-//       const tempoTotalAtendimento = atendimentos.reduce((total, atendimento) => {
-//         if (senhasNaoAtendidas.some((senha) => senha.codigo_senha === atendimento.codigo_senha)) {
-//           const tempoAtendimento = calcularTempoAtendimento(atendimento.criada_em, atendimento.actualizada_em);
-//           return total + tempoAtendimento;
-//         }
-//         return total;
-//       }, 0);
-
-//       const mediaTempoAtendimento = tempoTotalAtendimento / totalSenhasNaoAtendidas;
-//       const mdH = converterMTH(mediaTempoAtendimento)
-
-//       res.json({ media: mdH });
-//     });
-//   });
-// });
-
-// // Função para calcular o tempo de atendimento em milissegundos
-// function calcularTempoAtendimento(criadaEm, actualizadaEm) {
-//   const criada = new Date(criadaEm);
-//   const actualizada = new Date(actualizadaEm);
-//   return actualizada - criada;
-// }
-
-//converter em formato de hras
-// function converterTempo(segundos) {
-//   const horas = Math.floor(segundos / 3600);
-//   const minutos = Math.floor((segundos % 3600) / 60);
-//   const segundosRestantes = segundos % 60;
-
-//   const formatoHora = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
-
-//   return formatoHora;
-// }
-
-
-
-
 router.post('/senha', cors(corsOptions), function (req, res, next) {
   const { service, need } = req.body
 
-  db.query(`Insert into senha ()`,
+  db.query(`INSERT INTO senha (codigo_servico, codigo_situacao,atendida) VALUES (${service}, ${need}, 0)`,
     function (err, result) {
       if (err) throw err;
 
@@ -146,5 +93,51 @@ router.post('/senha', cors(corsOptions), function (req, res, next) {
       res.send(data);
     });
 });
+
+router.post('/senha2', cors(corsOptions), function (req, res, next) {
+  console.log(req)
+  const {codigo_servico, codigo_situacao} = req.body;
+
+
+  // db.query(`INSERT INTO senha (codigo_servico, codigo_situacao,atendida) VALUES (?, ?, ? )`,
+  // [codigo_servico, codigo_situacao , 0],
+  //  (err, result) => {
+  //   if (err) {
+  //     console.error('Erro ao inserir os dados no banco de dados:', err);
+  //     res.status(500).json({ error: 'Erro ao inserir os dados no banco de dados' });
+  //   } else {
+  //     const senhaId = result.insertId;
+  //     // res.send({ id: senhaId });
+  //   }
+  // });
+  res.send(JSON.stringify(req.body))
+});
+
+// Rota POST para adicionar uma senha
+router.post('/senha3', cors(corsOptions), (req, res) => {
+  const { codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em } = req.body;
+
+  console.log(codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em, req)
+  // // Verificar se todos os campos necessários foram fornecidos
+  // if (!codigo_servico || !codigo_situacao || !atendida || !criada_em || !atualizada_em) {
+  //   res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+  //   return;
+  // }
+
+  // Montar a consulta SQL para inserir a senha na tabela
+  const query = 'INSERT INTO senha (codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em) VALUES (?, ?, ?, ?, ?)';
+  const values = [codigo_servico, codigo_situacao, atendida, criada_em, actualizada_em];
+
+  // Executar a consulta no banco de dados
+  db.query(query, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao adicionar a senha:', err);
+      res.status(500).json({ error: 'Erro ao adicionar a senha' });
+    } else {
+      const senhaId = result.insertId;
+      res.json({ id: senhaId });
+    }
+  });
+})
 
 module.exports = router;

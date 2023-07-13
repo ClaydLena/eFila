@@ -12,6 +12,7 @@ function Senha() {
     const [confirmed, setConfirmed] = React.useState(false)
     const senha = JSON.parse(localStorage.getItem('senha'))
     const [data, setData] = useState()
+    const [post, setpost] = useState()
 
 
     useEffect(() => {
@@ -32,29 +33,39 @@ function Senha() {
         localStorage.clear()
     }
 
-    function handleConfirm() {
+    async function handleConfirm() {
+        let teste = await apiService.postData('senha3', 
+        {codigo_servico:senha.service, codigo_situacao:senha.need, atendida:0, criada_em: new Date(), actualizada_em:new Date()})
         setConfirmed(true)
-        localStorage.clear()
+        setpost(teste)
+        // localStorage.clear()
     }
 
-    function returnData (param){
+    function handleCreate() {
+        navigate('/')
+
+
+    }
+    console.log(post)
+
+    function returnData(param) {
         if (param == 'tempo' && senha.need !== 0 && senha.service == 0)
-        return converterTempo(data.depTempoEsperaEsp)
+            return converterTempo(data.depTempoEsperaEsp)
         if (param == 'tempo' && senha.need == 0 && senha.service == 0)
-        return converterTempo(data.depTempoEspera)
+            return converterTempo(data.depTempoEspera)
         if (param == 'tempo' && senha.need !== 0 && senha.service == 1)
-        return converterTempo(data.atTempoEsperaEsp)
+            return converterTempo(data.atTempoEsperaEsp)
         if (param == 'tempo' && senha.need == 0 && senha.service == 1)
-        return converterTempo(data.atTempoEspera)
+            return converterTempo(data.atTempoEspera)
 
         if (param == 'tamanho' && senha.need !== 0 && senha.service == 0)
-        return data.depTamanhoEsp
+            return data.depTamanhoEsp
         if (param == 'tamanho' && senha.need == 0 && senha.service == 0)
-        return data.depTamanho
+            return data.depTamanho
         if (param == 'tamanho' && senha.need !== 0 && senha.service == 1)
-        return data.atTamanhoEsp
+            return data.atTamanhoEsp
         if (param == 'tamanho' && senha.need == 0 && senha.service == 1)
-        return data.atTamanho
+            return data.atTamanho
     }
 
     return (
@@ -66,43 +77,48 @@ function Senha() {
                             <div>
                                 <p>Senha gerada com sucesso, memorize-a e fique atento à chamada.</p>
                                 <p>O teu código é</p>
-                                <h3>D0003</h3>
-
+                                {
+                                    senha.service == 0 ?
+                                    <h3>D00{post.id}</h3>
+                                    :
+                                    <h3>A00{post.id}</h3>
+                                }
+                                <br /><br />
                                 <Buttons
                                     label='Ok'
                                     variant='contained'
                                     color='secondary'
-                                    onClick={() => handleCancel()}
+                                    onClick={() => handleCreate()}
                                 />
                             </div>
                         </React.Fragment>
                         :
                         <React.Fragment>
                             <div>
-                                { data &&
-                                 <>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}>
-                                    <p>Pessoas na fila antes de você:</p><strong>{returnData('tamanho')}</strong>
-                                    </div>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}>
-                                    <p>Tempo de espera estimado:</p><strong>{returnData('tempo')}</strong>
-                                    </div>
+                                {data &&
+                                    <>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}>
+                                            <p>Pessoas na fila antes de você:</p><strong>{returnData('tamanho')}</strong>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '280px' }}>
+                                            <p>Tempo de espera estimado:</p><strong>{returnData('tempo')}</strong>
+                                        </div>
 
-                                <div className={classes.btnsGridLayout}>
-                                    <Buttons
-                                        label='Gerar Senha'
-                                        variant='contained'
-                                        color='primary'
-                                        onClick={() => handleConfirm()}
-                                    />
-                                    <Buttons
-                                        label='Cancelar'
-                                        variant='contained'
-                                        color='secondary'
-                                        onClick={() => handleCancel()}
-                                    />
-                                </div>
-                                 </>   
+                                        <div className={classes.btnsGridLayout}>
+                                            <Buttons
+                                                label='Gerar Senha'
+                                                variant='contained'
+                                                color='primary'
+                                                onClick={() => handleConfirm()}
+                                            />
+                                            <Buttons
+                                                label='Cancelar'
+                                                variant='contained'
+                                                color='secondary'
+                                                onClick={() => handleCancel()}
+                                            />
+                                        </div>
+                                    </>
                                 }
                             </div>
                         </React.Fragment>

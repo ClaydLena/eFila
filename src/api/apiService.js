@@ -9,7 +9,7 @@ function createResquestOptions(method, body) {
     return {
         method,
         headers: {
-            'Content-Type': 'applications/json',
+            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin':'*'
         },
         body: JSON.stringify(body)
